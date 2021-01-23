@@ -1,0 +1,47 @@
+.avatar {
+    display: flex;
+
+    .rounded-avatar {
+        border-radius: 50%;
+        margin: 0 auto;
+        vertical-align: middle;
+        
+    }
+
+    .img-avatar {
+        @extend .rounded-avatar;
+        max-height: inherit;
+    }
+
+    .img-avatar-sm {
+        @extend .img-avatar;
+        max-width: 30px;
+    }
+
+    .text-avatar{
+        @extend .rounded-avatar;
+        text-align: center;
+        background: #46b5e5;
+        background: linear-gradient(45deg,#46b5e5 1%,#1e88e5 64%,#40baf5 97%);
+        background-image: -ms-linear-gradient(45deg,#46b5e5 1%,#1e88e5 64%,#40baf5 97%);
+        background-image: -moz-linear-gradient(45deg,#46b5e5 1%,#1e88e5 64%,#40baf5 97%);
+        background-image: -o-linear-gradient(45deg,#46b5e5 1%,#1e88e5 64%,#40baf5 97%);
+        background-image: -webkit-linear-gradient(45deg,#46b5e5 1%,#1e88e5 64%,#40baf5 97%);
+        background-image: linear-gradient(45deg,#46b5e5 1%,#1e88e5 64%,#40baf5 97%);
+
+        span {
+            color: #fff;
+        }
+    }
+
+    .text-avatar-sm {
+        @extend .text-avatar;
+        max-width: 30px;
+        min-height: 30px;
+        
+        span {
+            line-height: 30px;
+            font-size: 2em;
+        }
+    }
+}
