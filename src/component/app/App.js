@@ -46,7 +46,7 @@ class App extends Component {
           loading: false
         });
       }).catch(error => {
-        console.log(error);
+        Alert.error(error);
         this.setState({
           loading: false
         });
@@ -65,8 +65,6 @@ class App extends Component {
   }
 
   render() {
-    //console.log(this.props);
-
     if(this.state.loading) {
       return <LoadingIndicator />
     }

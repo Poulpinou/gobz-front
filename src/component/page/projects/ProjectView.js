@@ -7,7 +7,7 @@ class ProjectView extends Component {
 
         if(!project){
             return (
-                <p>Aucun projet selectionné</p>
+                <p className="text-centered">Aucun projet selectionné</p>
             )
         }
 

@@ -1,4 +1,4 @@
-import { request } from '../util/APIUtils'
+import { request } from './Api'
 import { API_BASE_URL } from '../constant';
 
 export function login(loginRequest) {
