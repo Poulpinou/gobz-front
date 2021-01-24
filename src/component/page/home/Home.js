@@ -8,7 +8,9 @@ class Home extends Component {
             <div className="home-container">
                 <div className="container">
                     <h1>Bienvenue sur Gobz!</h1>
-                    <h3>Veuillez vous connecter</h3>
+                    {this.props.authenticated != true ?? (
+                        <h3>Veuillez vous connecter</h3>
+                    )}
                 </div>
             </div>
         )

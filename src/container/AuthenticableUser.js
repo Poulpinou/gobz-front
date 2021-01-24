@@ -7,9 +7,9 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 const mapStateToProps = (state) => ({
-        currentUser: state.currentUser?.currentUser,
-        authenticated: state.currentUser?.authenticated ?? false
-    })
+    currentUser: state.auth?.currentUser,
+    authenticated: state.auth?.authenticated ?? false
+})
 
 const AuthenticableUser = connect(
     mapStateToProps,

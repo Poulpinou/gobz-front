@@ -1,0 +1,9 @@
+@import '../../style/main.scss';
+
+.app-header{
+    height: $appHeaderHeight;
+
+    nav{
+        max-height: $appHeaderHeight;
+    }
+}

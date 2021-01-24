@@ -3,16 +3,16 @@ import {
     Badge
 } from 'react-bootstrap';
 
-class UserBadge extends Component {
+class Avatar extends Component {
     render() {
         return (
             <Badge className="avatar">
                 { 
-                    this.props.currentUser.imageUrl ? (
-                        <img className="img-avatar-sm" src={this.props.currentUser.imageUrl} alt={this.props.currentUser.name}/>
+                    this.props.imageUrl ? (
+                        <img className="img-avatar-sm" src={this.props.imageUrl} alt={this.props.name}/>
                     ) : (
                         <div className="text-avatar-sm">
-                            <span>{this.props.currentUser.name && this.props.currentUser.name[0]}</span>
+                            <span>{this.props.name && this.props.name[0]}</span>
                         </div>
                     )
                 }
@@ -21,4 +21,4 @@ class UserBadge extends Component {
     }
 }
 
-export default UserBadge;
+export default Avatar;

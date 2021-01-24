@@ -9,6 +9,7 @@ import Home from '../page/home/Home';
 import Login from '../page/login/Login';
 import Signup from '../page/signup/Signup';
 import Profile from '../page/profile/Profile';
+import ProjectsPage from '../page/projects/ProjectsPage';
 import OAuth2RedirectHandler from '../common/OAuth2RedirectHandler';
 import NotFound from '../page/error/notFound/NotFound';
 import LoadingIndicator from '../common/LoadingIndicator';
@@ -33,24 +34,23 @@ class App extends Component {
   }
 
   loadCurrentlyLoggedInUser() {
-    console.log("passe")
     this.setState({
       loading: true
     });
 
     getCurrentUser()
-    .then(response => {
-      this.props.actions.setLoggedUser(response);
+      .then(response => {
+        this.props.actions.setLoggedUser(response);
 
-      this.setState({
-        loading: false
-      });
-    }).catch(error => {
-      console.log(error);
-      this.setState({
-        loading: false
-      });
-    });    
+        this.setState({
+          loading: false
+        });
+      }).catch(error => {
+        console.log(error);
+        this.setState({
+          loading: false
+        });
+      });    
   }
 
   handleLogout() {
@@ -90,11 +90,12 @@ class App extends Component {
             <Route path="/oauth2/redirect" component={OAuth2RedirectHandler}></Route>  
             
             {/* Private Routes */}
-            <PrivateRoute 
-              path="/profile" 
-              authenticated={authenticated} 
-              currentUser={currentUser}
+            <PrivateRoute  path="/profile" authenticated={authenticated} currentUser={currentUser}
               component={Profile}>
+            </PrivateRoute>
+
+            <PrivateRoute path="/projects" authenticated={authenticated} currentUser={currentUser}>
+              <ProjectsPage/>
             </PrivateRoute>
 
             <Route component={NotFound}></Route>

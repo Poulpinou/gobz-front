@@ -1,11 +1,18 @@
+$avatar-sm-size: 25px;
+
 .avatar {
-    display: flex;
+    margin-top: auto;
+    margin-bottom: auto;
+
+    @mixin avatar-sm {
+        height: $avatar-sm-size;
+        width: $avatar-sm-size;
+    }
 
     .rounded-avatar {
         border-radius: 50%;
         margin: 0 auto;
         vertical-align: middle;
-        
     }
 
     .img-avatar {
@@ -15,7 +22,7 @@
 
     .img-avatar-sm {
         @extend .img-avatar;
-        max-width: 30px;
+        @include avatar-sm;
     }
 
     .text-avatar{
@@ -36,12 +43,11 @@
 
     .text-avatar-sm {
         @extend .text-avatar;
-        max-width: 30px;
-        min-height: 30px;
+        @include avatar-sm;
         
         span {
-            line-height: 30px;
-            font-size: 2em;
+            line-height: $avatar-sm-size;
+            font-size: calc($avatar-sm-size - 5px);
         }
     }
 }

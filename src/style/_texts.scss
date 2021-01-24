@@ -1,0 +1,25 @@
+.text-primary {
+    color: $primary;
+}
+
+.text-secondary {
+    color: $secondary;
+}
+
+.text-light {
+    color: white;
+}
+
+.text-bold {
+    font-weight: bold;
+}
+
+.text-centered {
+    text-align: center;
+}
+
+.title-primary {
+    @extend .text-primary;
+    @extend .text-bold;
+    @extend .text-centered;
+}
