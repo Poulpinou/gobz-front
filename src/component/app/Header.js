@@ -4,7 +4,7 @@ import {
     Nav,
     NavDropdown
 } from 'react-bootstrap';
-import Avatar from '../common/Avatar'
+import Avatar from '../common/avatar'
 import logo from '../../img/gobz-logo.png';
 
 class AppHeader extends Component {

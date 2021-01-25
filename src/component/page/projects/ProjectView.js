@@ -8,11 +8,11 @@ import {
     Tabs,
     Tab
 } from 'react-bootstrap';
-import Avatar from '../../common/Avatar';
+import Avatar from '../../common/avatar';
 import ProjectUpdateModal from './ProjectUpdateModal';
 import ProjectDeletionModal from './ProjectDeletionModal';
 import ProjectsContainer from '../../../container/ProjectsContainer';
-import LoadingIndicator from '../../common/LoadingIndicator';
+import LoadingIndicator from '../../common/loadingIndicator';
 import { getFullProject } from '../../../api/ProjectsApi';
 
 class ProjectView extends Component {

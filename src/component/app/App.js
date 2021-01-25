@@ -1,24 +1,15 @@
 import React, { Component } from 'react';
 import {
-  Route,
-  Switch
-} from 'react-router-dom';
-import AppHead from './AppHead';
-import AppHeader from './AppHeader';
-import Home from '../page/home/Home';
-import Login from '../page/login/Login';
-import Signup from '../page/signup/Signup';
-import Profile from '../page/profile/Profile';
-import ProjectsPage from '../page/projects/ProjectsPage';
-import OAuth2RedirectHandler from '../common/OAuth2RedirectHandler';
-import NotFound from '../page/error/notFound/NotFound';
-import LoadingIndicator from '../common/LoadingIndicator';
+  Header,
+  Head,
+  Router
+} from './';
+import LoadingIndicator from '../common/loadingIndicator';
 import { getCurrentUser } from '../../api/UserApi';
 import { ACCESS_TOKEN } from '../../constant';
-import PrivateRoute from '../common/PrivateRoute';
 import Alert from 'react-s-alert';
 import './style.scss';
-import AuthenticableUser from '../../container/AuthenticableUser';
+import AuthenticableUser from '../../container/AuthContainer';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { far } from '@fortawesome/free-regular-svg-icons'
 
@@ -73,31 +64,12 @@ class App extends Component {
 
     return (
       <div className="app">
-        <AppHead/>
+        <Head/>
         <div className="app-top-box">
-          <AppHeader authenticated={authenticated} currentUser={currentUser} onLogout={this.handleLogout} />
+          <Header authenticated={authenticated} currentUser={currentUser} onLogout={this.handleLogout} />
         </div>
         <div className="app-body">
-          <Switch>
-            {/* Public Routes */}
-            <Route exact path="/" component={Home}></Route>           
-            <Route path="/login"
-              render={(props) => <Login authenticated={authenticated} {...props} />}></Route>
-            <Route path="/signup"
-              render={(props) => <Signup authenticated={authenticated} {...props} />}></Route>
-            <Route path="/oauth2/redirect" component={OAuth2RedirectHandler}></Route>  
-            
-            {/* Private Routes */}
-            <PrivateRoute  path="/profile" authenticated={authenticated} currentUser={currentUser}
-              component={Profile}>
-            </PrivateRoute>
-
-            <PrivateRoute path="/projects" authenticated={authenticated} currentUser={currentUser}>
-              <ProjectsPage/>
-            </PrivateRoute>
-
-            <Route component={NotFound}></Route>
-          </Switch>
+          <Router authenticated={authenticated} currentUser={currentUser}/>
         </div>
         <Alert stack={{limit: 3}} 
           timeout = {3000}

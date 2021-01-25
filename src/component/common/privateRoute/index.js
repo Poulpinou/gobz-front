@@ -10,7 +10,7 @@ const PrivateRoute = ({ component: Component, authenticated, ...rest }) => (
       {...rest}
       render={props =>
         authenticated ? (
-          this.props.children
+          this?.props?.children
           ? this.props.children
           : <Component {...rest} {...props} />
         ) : (

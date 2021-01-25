@@ -1,4 +1,4 @@
-import * as types from '../constant/type/action/UserActionTypes';
+import * as types from '../constant/action/AuthActionTypes';
 
 export const setLoggedUser = (user) => ({
     type: types.SET_LOGGED_USER,

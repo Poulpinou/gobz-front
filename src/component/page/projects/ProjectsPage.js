@@ -10,7 +10,7 @@ import {
     Button
  }  from 'react-bootstrap';
  import { getProjects } from '../../../api/ProjectsApi';
- import LoadingIndicator from '../../common/LoadingIndicator';
+ import LoadingIndicator from '../../common/loadingIndicator';
  import Alert from 'react-s-alert';
 
 class ProjectsPage extends Component {
