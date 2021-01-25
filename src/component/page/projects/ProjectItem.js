@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Avatar from '../../common/Avatar';
+import Avatar from '../../common/avatar';
 
 class ProjectItem extends Component {
     render(){

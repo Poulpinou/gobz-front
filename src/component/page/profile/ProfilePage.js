@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-//import './Profile.scss';
 
-class Profile extends Component {
+class ProfilePage extends Component {
     constructor(props) {
         super(props);
         console.log(props);
@@ -33,4 +32,4 @@ class Profile extends Component {
     }
 }
 
-export default Profile
+export default ProfilePage

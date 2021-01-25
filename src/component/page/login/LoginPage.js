@@ -1,12 +1,28 @@
 import React, { Component } from 'react';
-import './Signup.scss';
+import './style.scss';
+import { GOOGLE_AUTH_URL, ACCESS_TOKEN } from '../../../constant';
+import { login } from '../../../api/AuthApi';
 import { Link, Redirect } from 'react-router-dom'
-import { GOOGLE_AUTH_URL } from '../../../constant';
-import { signup } from '../../../api/AuthApi';
 import googleLogo from '../../../img/google-logo.png';
 import Alert from 'react-s-alert';
 
-class Signup extends Component {
+class Login extends Component {
+    componentDidMount() {
+        // If the OAuth2 login encounters an error, the user is redirected to the /login page with an error.
+        // Here we display the error and then remove the error query parameter from the location.
+        if(this.props.location.state && this.props.location.state.error) {
+            setTimeout(() => {
+                Alert.error(this.props.location.state.error, {
+                    timeout: 5000
+                });
+                this.props.history.replace({
+                    pathname: this.props.location.pathname,
+                    state: {}
+                });
+            }, 100);
+        }
+    }
+    
     render() {
         if(this.props.authenticated) {
             return <Redirect
@@ -17,42 +33,40 @@ class Signup extends Component {
         }
 
         return (
-            <div className="signup-container">
-                <div className="signup-content">
-                    <h1 className="signup-title">Création du compte Gobz</h1>
-                    <SocialSignup />
+            <div className="login-container">
+                <div className="login-content">
+                    <h1 className="login-title">Connexion à Gobz</h1>
+                    <SocialLogin />
                     <div className="or-separator">
                         <span className="or-text">OU</span>
                     </div>
-                    <SignupForm {...this.props} />
-                    <span className="login-link">Vous avez déjà un compte? <Link to="/login">Connectez vous!</Link></span>
+                    <LoginForm {...this.props} />
+                    <span className="signup-link">Nouveau? <Link to="/signup">Créez un compte!</Link></span>
                 </div>
             </div>
         );
     }
 }
 
-
-class SocialSignup extends Component {
+class SocialLogin extends Component {
     render() {
         return (
-            <div className="social-signup">
+            <div className="social-login">
                 <a className="btn btn-block social-btn google" href={GOOGLE_AUTH_URL}>
-                    <img src={googleLogo} alt="Google" /> Utiliser mon compte Google
-                </a>
+                    <img src={googleLogo} alt="Google" /> Connexion avec Google</a>
             </div>
         );
     }
 }
 
-class SignupForm extends Component {
+
+class LoginForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: '',
             email: '',
             password: ''
-        }
+        };
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -70,25 +84,21 @@ class SignupForm extends Component {
     handleSubmit(event) {
         event.preventDefault();   
 
-        const signUpRequest = Object.assign({}, this.state);
+        const loginRequest = Object.assign({}, this.state);
 
-        signup(signUpRequest)
+        login(loginRequest)
         .then(response => {
-            Alert.success("Votre compte a bien été créé! Connectez vous pour continuer");
-            this.props.history.push("/login");
+            localStorage.setItem(ACCESS_TOKEN, response.accessToken);
+            Alert.success("Connexion réussie!");
+            this.props.history.push("/");
         }).catch(error => {
-            Alert.error((error && error.message) || 'Oops! Il y a eu un souci. Veuillez réessayer!');            
+            Alert.error((error && error.message) || 'Oops! Il y a eu un souci. Veuillez réessayer!');
         });
     }
-
+    
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
-                <div className="form-item">
-                    <input type="text" name="name" 
-                        className="form-control" placeholder="Nom"
-                        value={this.state.name} onChange={this.handleInputChange} required/>
-                </div>
                 <div className="form-item">
                     <input type="email" name="email" 
                         className="form-control" placeholder="Email"
@@ -100,12 +110,11 @@ class SignupForm extends Component {
                         value={this.state.password} onChange={this.handleInputChange} required/>
                 </div>
                 <div className="form-item">
-                    <button type="submit" className="btn btn-block btn-primary" >Créer mon compte</button>
+                    <button type="submit" className="btn btn-block btn-primary">Connexion</button>
                 </div>
             </form>                    
-
         );
     }
 }
 
-export default Signup
+export default Login

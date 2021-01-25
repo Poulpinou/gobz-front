@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {
     Badge
 } from 'react-bootstrap';
+import './style.scss'
 
 class Avatar extends Component {
     render() {

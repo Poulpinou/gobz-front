@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { ACCESS_TOKEN } from '../../constant';
+import { ACCESS_TOKEN } from '../../../constant';
 import { Redirect } from 'react-router-dom';
-import AuthenticableUser from '../../container/AuthenticableUser';
-import { getCurrentUser } from '../../api/UserApi';
+import AuthContainer from '../../../container/AuthContainer';
+import { getCurrentUser } from '../../../api/UserApi';
 
 class OAuth2RedirectHandler extends Component {
     getUrlParameter(name) {
@@ -43,4 +43,4 @@ class OAuth2RedirectHandler extends Component {
     }
 }
 
-export default AuthenticableUser(OAuth2RedirectHandler);
+export default AuthContainer(OAuth2RedirectHandler);

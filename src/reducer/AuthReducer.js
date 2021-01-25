@@ -1,4 +1,4 @@
-import * as types from '../constant/type/action/UserActionTypes';
+import * as types from '../constant/action/AuthActionTypes';
 
 const auth = (state = null, action) => {
     switch (action.type) {
