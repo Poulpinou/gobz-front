@@ -16,3 +16,11 @@ export function createProject(project){
         body: JSON.stringify(project)
     })
 }
+
+export function updateProject(project){
+    return request({
+        url: API_BASE_URL + "/projects/" + project.id,
+        method: 'POST',
+        body: JSON.stringify(project)
+    })
+}

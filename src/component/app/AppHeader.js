@@ -6,7 +6,6 @@ import {
 } from 'react-bootstrap';
 import Avatar from '../common/Avatar'
 import logo from '../../img/gobz-logo.png';
-import './AppHeader.scss'
 
 class AppHeader extends Component {
     render() {
@@ -36,13 +35,12 @@ class AppHeader extends Component {
                     )}
                     { this.props.authenticated ? (
                         <Nav>
-                            <Avatar imageUrl={this.props.currentUser?.imageUrl} name={this.props.currentUser?.name}/>
+                            <Avatar imageUrl={this.props.currentUser?.imageUrl} name={this.props.currentUser?.name} size="sm"/>
                             <NavDropdown title={this.props.currentUser?.name ?? "Inconnu"}>
                                 <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
                                 <NavDropdown.Divider />
                                 <NavDropdown.Item onClick={this.props.onLogout}>Déconnexion</NavDropdown.Item>
                             </NavDropdown>
-                            {/*<Nav.Link onClick={this.props.onLogout}>Déconnexion</Nav.Link>*/}
                         </Nav>
                     ):(
                         <Nav>

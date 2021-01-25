@@ -9,9 +9,9 @@ class Avatar extends Component {
             <Badge className="avatar">
                 { 
                     this.props.imageUrl ? (
-                        <img className="img-avatar-sm" src={this.props.imageUrl} alt={this.props.name}/>
+                        <img className={"img-avatar-" + (this.props.size ?? "md")} src={this.props.imageUrl} alt={this.props.name}/>
                     ) : (
-                        <div className="text-avatar-sm">
+                        <div className={"text-avatar-" + (this.props.size ?? "md")}>
                             <span>{this.props.name && this.props.name[0]}</span>
                         </div>
                     )

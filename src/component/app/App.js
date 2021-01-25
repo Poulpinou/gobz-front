@@ -19,8 +19,12 @@ import PrivateRoute from '../common/PrivateRoute';
 import Alert from 'react-s-alert';
 import 'react-s-alert/dist/s-alert-default.css';
 import 'react-s-alert/dist/s-alert-css-effects/slide.css';
-import './App.scss';
+import './style.scss';
 import AuthenticableUser from '../../container/AuthenticableUser';
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { far } from '@fortawesome/free-regular-svg-icons'
+
+library.add(far)
 
 class App extends Component {
   constructor(props) {

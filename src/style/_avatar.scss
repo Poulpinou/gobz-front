@@ -1,4 +1,6 @@
 $avatar-sm-size: 25px;
+$avatar-md-size: 50px;
+$avatar-lg-size: 100px;
 
 .avatar {
     margin-top: auto;
@@ -7,6 +9,16 @@ $avatar-sm-size: 25px;
     @mixin avatar-sm {
         height: $avatar-sm-size;
         width: $avatar-sm-size;
+    }
+
+    @mixin avatar-md {
+        height: $avatar-md-size;
+        width: $avatar-md-size;
+    }
+
+    @mixin avatar-lg {
+        height: $avatar-lg-size;
+        width: $avatar-lg-size;
     }
 
     .rounded-avatar {
@@ -25,6 +37,16 @@ $avatar-sm-size: 25px;
         @include avatar-sm;
     }
 
+    .img-avatar-md {
+        @extend .img-avatar;
+        @include avatar-md;
+    }
+
+    .img-avatar-lg {
+        @extend .img-avatar;
+        @include avatar-lg;
+    }
+
     .text-avatar{
         @extend .rounded-avatar;
         text-align: center;
@@ -41,7 +63,27 @@ $avatar-sm-size: 25px;
         
         span {
             line-height: $avatar-sm-size;
-            font-size: calc($avatar-sm-size - 5px);
+            font-size: $avatar-sm-size - 5px;
+        }
+    }
+
+    .text-avatar-md {
+        @extend .text-avatar;
+        @include avatar-md;
+        
+        span {
+            line-height: $avatar-md-size;
+            font-size: $avatar-md-size - 5px;
+        }
+    }
+
+    .text-avatar-lg {
+        @extend .text-avatar;
+        @include avatar-lg;
+        
+        span {
+            line-height: $avatar-lg-size;
+            font-size: $avatar-lg-size - 5px;
         }
     }
 }
