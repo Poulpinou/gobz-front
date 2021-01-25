@@ -1,11 +1,30 @@
+$avatar-sm-size: 25px;
+$avatar-md-size: 50px;
+$avatar-lg-size: 100px;
+
 .avatar {
-    display: flex;
+    margin-top: auto;
+    margin-bottom: auto;
+
+    @mixin avatar-sm {
+        height: $avatar-sm-size;
+        width: $avatar-sm-size;
+    }
+
+    @mixin avatar-md {
+        height: $avatar-md-size;
+        width: $avatar-md-size;
+    }
+
+    @mixin avatar-lg {
+        height: $avatar-lg-size;
+        width: $avatar-lg-size;
+    }
 
     .rounded-avatar {
         border-radius: 50%;
         margin: 0 auto;
         vertical-align: middle;
-        
     }
 
     .img-avatar {
@@ -15,19 +34,23 @@
 
     .img-avatar-sm {
         @extend .img-avatar;
-        max-width: 30px;
+        @include avatar-sm;
+    }
+
+    .img-avatar-md {
+        @extend .img-avatar;
+        @include avatar-md;
+    }
+
+    .img-avatar-lg {
+        @extend .img-avatar;
+        @include avatar-lg;
     }
 
     .text-avatar{
         @extend .rounded-avatar;
         text-align: center;
-        background: #46b5e5;
-        background: linear-gradient(45deg,#46b5e5 1%,#1e88e5 64%,#40baf5 97%);
-        background-image: -ms-linear-gradient(45deg,#46b5e5 1%,#1e88e5 64%,#40baf5 97%);
-        background-image: -moz-linear-gradient(45deg,#46b5e5 1%,#1e88e5 64%,#40baf5 97%);
-        background-image: -o-linear-gradient(45deg,#46b5e5 1%,#1e88e5 64%,#40baf5 97%);
-        background-image: -webkit-linear-gradient(45deg,#46b5e5 1%,#1e88e5 64%,#40baf5 97%);
-        background-image: linear-gradient(45deg,#46b5e5 1%,#1e88e5 64%,#40baf5 97%);
+        background: $primary;
 
         span {
             color: #fff;
@@ -36,12 +59,31 @@
 
     .text-avatar-sm {
         @extend .text-avatar;
-        max-width: 30px;
-        min-height: 30px;
+        @include avatar-sm;
         
         span {
-            line-height: 30px;
-            font-size: 2em;
+            line-height: $avatar-sm-size;
+            font-size: $avatar-sm-size - 5px;
+        }
+    }
+
+    .text-avatar-md {
+        @extend .text-avatar;
+        @include avatar-md;
+        
+        span {
+            line-height: $avatar-md-size;
+            font-size: $avatar-md-size - 5px;
+        }
+    }
+
+    .text-avatar-lg {
+        @extend .text-avatar;
+        @include avatar-lg;
+        
+        span {
+            line-height: $avatar-lg-size;
+            font-size: $avatar-lg-size - 5px;
         }
     }
 }

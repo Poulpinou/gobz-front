@@ -1,4 +1,4 @@
-import { request } from '../util/APIUtils'
+import { request } from './Api'
 import { API_BASE_URL, ACCESS_TOKEN } from '../constant';
 
 export function getCurrentUser() {

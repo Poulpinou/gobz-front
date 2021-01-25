@@ -1,26 +1,16 @@
 import * as types from '../constant/type/action/ProjectActionTypes';
 
-export const getProjects = () => ({
-    type: types.GET_PROJECTS
+export const setActiveProject = (project) => ({
+    type: types.SET_ACTIVE_PROJECT,
+    active: project
 })
 
-export const getProject = (id)  => ({
-    type: types.GET_PROJECT,
-    id
+export const setProjects = (projects) => ({
+    type: types.SET_PROJECTS,
+    projects: projects
 })
 
-export const createProject = (name) => ({
-    type: types.CREATE_PROJECT,
-    name
-})
-
-export const updateProject = (id, projectUpdates) => ({
-    type: types.UPDATE_PROJECT,
-    id,
-    projectUpdates
-})
-
-export const deleteProject = (id) => ({
-    type: types.DELETE_PROJECT,
-    id
+export const setProjectsActiveFirst = (projects) => ({
+    type: types.SET_PROJECTS_ACTIVE_FIRST,
+    projects: projects
 })

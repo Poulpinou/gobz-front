@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-//import './Signup.scss';
+import './Signup.scss';
 import { Link, Redirect } from 'react-router-dom'
 import { GOOGLE_AUTH_URL } from '../../../constant';
 import { signup } from '../../../api/AuthApi';

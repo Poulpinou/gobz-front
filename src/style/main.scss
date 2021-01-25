@@ -1,6 +1,7 @@
-@import "./_customBootstrap.scss";
-
 @import './variables.scss';
 @import './colors.scss';
 @import './mixins.scss';
 @import './avatar.scss';
+@import './texts.scss';
+
+@import "~bootstrap/scss/bootstrap";

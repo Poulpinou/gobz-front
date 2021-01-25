@@ -4,7 +4,7 @@ import {
     Nav,
     NavDropdown
 } from 'react-bootstrap';
-import UserBadge from '../common/userBadge/UserBadge'
+import Avatar from '../common/Avatar'
 import logo from '../../img/gobz-logo.png';
 
 class AppHeader extends Component {
@@ -26,7 +26,7 @@ class AppHeader extends Component {
                         <Nav className="mr-auto">
                             <Nav.Link href="/">Home</Nav.Link>
                             <Nav.Link href="/">Run actif</Nav.Link>
-                            <Nav.Link href="/">Projets</Nav.Link>
+                            <Nav.Link href="/projects">Projets</Nav.Link>
                         </Nav>
                     ):(
                         <Nav className="mr-auto">
@@ -35,13 +35,12 @@ class AppHeader extends Component {
                     )}
                     { this.props.authenticated ? (
                         <Nav>
-                            <UserBadge currentUser={this.props.currentUser}/>
+                            <Avatar imageUrl={this.props.currentUser?.imageUrl} name={this.props.currentUser?.name} size="sm"/>
                             <NavDropdown title={this.props.currentUser?.name ?? "Inconnu"}>
                                 <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
                                 <NavDropdown.Divider />
                                 <NavDropdown.Item onClick={this.props.onLogout}>Déconnexion</NavDropdown.Item>
                             </NavDropdown>
-                            {/*<Nav.Link onClick={this.props.onLogout}>Déconnexion</Nav.Link>*/}
                         </Nav>
                     ):(
                         <Nav>
