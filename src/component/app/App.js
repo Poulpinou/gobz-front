@@ -17,13 +17,12 @@ import { getCurrentUser } from '../../api/UserApi';
 import { ACCESS_TOKEN } from '../../constant';
 import PrivateRoute from '../common/PrivateRoute';
 import Alert from 'react-s-alert';
-import 'react-s-alert/dist/s-alert-default.css';
-import 'react-s-alert/dist/s-alert-css-effects/slide.css';
 import './style.scss';
 import AuthenticableUser from '../../container/AuthenticableUser';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { far } from '@fortawesome/free-regular-svg-icons'
 
+// Load fontawesome libraries
 library.add(far)
 
 class App extends Component {
@@ -32,12 +31,9 @@ class App extends Component {
     this.state = {
       loading: true
     }
-
-    this.loadCurrentlyLoggedInUser = this.loadCurrentlyLoggedInUser.bind(this);
-    this.handleLogout = this.handleLogout.bind(this);
   }
 
-  loadCurrentlyLoggedInUser() {
+  loadCurrentlyLoggedInUser = () => {
     this.setState({
       loading: true
     });
@@ -57,7 +53,7 @@ class App extends Component {
       });    
   }
 
-  handleLogout() {
+  handleLogout = () => {
     localStorage.removeItem(ACCESS_TOKEN);
     this.props.actions.logoutUser();
 

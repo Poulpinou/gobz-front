@@ -9,6 +9,20 @@ export function getProjects(){
     })
 }
 
+export function getProject(projectId){
+    return request({
+        url: API_BASE_URL + "/projects/" + projectId,
+        method: "GET"
+    })
+}
+
+export function getFullProject(projectId){
+    return request({
+        url: API_BASE_URL + "/projects/" + projectId + "/full",
+        method: "GET"
+    })
+}
+
 export function createProject(project){
     return request({
         url: API_BASE_URL + "/projects",
@@ -20,7 +34,15 @@ export function createProject(project){
 export function updateProject(project){
     return request({
         url: API_BASE_URL + "/projects/" + project.id,
-        method: 'POST',
+        method: 'PUT',
         body: JSON.stringify(project)
+    })
+}
+
+
+export function deleteProject(project){
+    return request({
+        url: API_BASE_URL + "/projects/" + project.id,
+        method: 'DELETE'
     })
 }

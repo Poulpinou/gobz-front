@@ -1,7 +1,7 @@
 @import '../../../style/main';
 
 
-$sideBarWidth: 300px;
+$sideBarWidth: 20%;
 
 .projects-page{
     .sidebar{
@@ -120,7 +120,7 @@ $sideBarWidth: 300px;
         }
 
         .content {
-            height: 1000px;
+            min-height: 200px;
         }
     }
 }

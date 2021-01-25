@@ -9,7 +9,11 @@ import {
     Tab
 } from 'react-bootstrap';
 import Avatar from '../../common/Avatar';
-import ProjectUpdateModal from './ProjectUpdateModal'
+import ProjectUpdateModal from './ProjectUpdateModal';
+import ProjectDeletionModal from './ProjectDeletionModal';
+import ProjectsContainer from '../../../container/ProjectsContainer';
+import LoadingIndicator from '../../common/LoadingIndicator';
+import { getFullProject } from '../../../api/ProjectsApi';
 
 class ProjectView extends Component {
 
@@ -17,7 +21,10 @@ class ProjectView extends Component {
         super(props);
 
         this.state = {
-            activeTab:"chapters"
+            isLoading: true,
+            lastActive: null,
+            activeTab:"chapters",
+            project: null
         }
     }
 
@@ -42,9 +49,59 @@ class ProjectView extends Component {
                 return <p>Onglet inconnu</p>;
         }
     }
+
+    fetchProject = () => {
+        const active = this.props.projects.active;
+        if(!active){
+            this.setState({
+                isLoading: false
+            });
+            return;
+        }
+
+        this.setState({
+            isLoading: true,
+            lastActive: active
+        });
+
+        getFullProject(active.id)
+         .then((response) => {
+            this.setState({
+                project: response,
+                isLoading: false
+            });
+         })
+         .catch(error => {
+            console.error(error);
+            
+            this.setState({
+                isLoading: false
+            });
+        })
+    }
+
+    componentDidMount(){
+        if(this.props.projects?.active ?? false){
+            this.fetchProject();
+        }else{
+            this.setState({
+                isLoading: false
+            });
+        }
+    }
+
+    componentDidUpdate(){
+        if(!this.state.isLoading && this.props.projects?.active != this.state.lastActive){
+            this.fetchProject();
+        }
+    }
     
     render(){
-        const {project} = this.props;
+        const {isLoading, project} = this.state;
+
+        if(isLoading) {
+            return <LoadingIndicator />
+        }
 
         if(!project){
             return (
@@ -63,18 +120,16 @@ class ProjectView extends Component {
                         <p>{project.description}</p>
                     </Col>
                     <Col md="auto" className="actions">
-                        <Button variant="primary">
-                            <FontAwesomeIcon icon={["far","user"]}/>
-                            {' '} Membres
-                        </Button>
-                        <ProjectUpdateModal project={project}>
+                        <ProjectUpdateModal project={project} onProjectUpdated={this.fetchProject}>
                             <Button variant="primary">
                                 <FontAwesomeIcon icon={["far","edit"]}/>
                             </Button>
                         </ProjectUpdateModal>
-                        <Button variant="primary">
-                            <FontAwesomeIcon icon={["far","trash-alt"]}/>
-                        </Button>
+                        <ProjectDeletionModal project={project} onProjectDeleted={() => window.location.reload(false)}>
+                            <Button variant="primary">
+                                <FontAwesomeIcon icon={["far","trash-alt"]}/>
+                            </Button>
+                        </ProjectDeletionModal>
                     </Col>
                 </Row>
                 <Row className="project-sections">
@@ -92,4 +147,4 @@ class ProjectView extends Component {
     }
 }
 
-export default ProjectView;
+export default ProjectsContainer(ProjectView);

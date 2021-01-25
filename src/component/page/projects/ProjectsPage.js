@@ -89,10 +89,7 @@ class ProjectsPage extends Component {
     }
 
     render(){
-        if(this.state.isLoading) {
-            return <LoadingIndicator />
-        }
-
+        
         return (
             <div className="projects-page">
                 <div className="sidebar">
@@ -101,13 +98,14 @@ class ProjectsPage extends Component {
                     </div>
 
                     <div className="project-list">
-                        {this.renderProjectList()}
+                        {this.state.isLoading
+                            ? <LoadingIndicator />
+                            : this.renderProjectList()
+                        }
                     </div>
                 </div>
                 <div className="content">
-                    <ProjectView
-                        project={this.props.projects?.active}
-                    />
+                    <ProjectView/>
                 </div>
             </div>
         )

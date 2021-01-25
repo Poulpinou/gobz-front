@@ -75,7 +75,7 @@ import {
                 </Form.Group>
 
                 <Form.Group controlId="form-create-project-shared">
-                    <Form.Check onChange={this.handleInputChange} type="checkbox" label="Projet public" name="shared" value={project.shared} />
+                    <Form.Check onChange={this.handleInputChange} type="checkbox" label="Projet public" name="shared" checked={project.shared} />
                     <Form.Text className="text-muted">
                         Si coché, votre projet sera visible par tout le monde mais ne pourra être modifié que par vous et les contributeurs désignés du projet.
                     </Form.Text>
