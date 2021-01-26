@@ -13,6 +13,7 @@ import ProjectUpdateModal from './ProjectUpdateModal';
 import ProjectDeletionModal from './ProjectDeletionModal';
 import ProjectsContainer from '../../../container/ProjectsContainer';
 import LoadingIndicator from '../../common/loadingIndicator';
+import ChapterSection from './section/ChapterSection';
 import { getFullProject } from '../../../api/ProjectsApi';
 
 class ProjectView extends Component {
@@ -37,7 +38,7 @@ class ProjectView extends Component {
     getActiveTab=() => {
         switch (this.state.activeTab) {
             case "chapters":
-                return <p>Chapitres</p>
+                return <ChapterSection project={this.state.project}/>
 
             case "members":
                 return <p>Membres</p>
@@ -138,7 +139,7 @@ class ProjectView extends Component {
                         <Tab eventKey="members" title="Membres"/>
                         <Tab eventKey="links" title="Liens Utiles"/>
                     </Tabs>
-                    <div className="content">
+                    <div className="section-content">
                         {this.getActiveTab()}
                     </div>
                 </Row>

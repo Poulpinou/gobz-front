@@ -40,7 +40,7 @@ class ProjectsPage extends Component {
     }
 
     renderProjectList(){
-        if(!this.props.projects?.list?.length ?? false){
+        if(this.props.projects?.list?.length <= 0){
             return <p className="text-centered">Aucun projet trouvé</p>
         }else{
             return this.props.projects.list.map(

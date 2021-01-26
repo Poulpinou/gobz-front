@@ -23,3 +23,9 @@
     @extend .text-bold;
     @extend .text-centered;
 }
+
+.title-secondary {
+    @extend .text-primary;
+    @extend .text-bold;
+    @extend .text-centered;
+}

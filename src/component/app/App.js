@@ -10,11 +10,13 @@ import { ACCESS_TOKEN } from '../../constant';
 import Alert from 'react-s-alert';
 import './style.scss';
 import AuthenticableUser from '../../container/AuthContainer';
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { far } from '@fortawesome/free-regular-svg-icons'
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { far } from '@fortawesome/free-regular-svg-icons';
+import { fas } from '@fortawesome/free-solid-svg-icons';
 
 // Load fontawesome libraries
 library.add(far)
+library.add(fas)
 
 class App extends Component {
   constructor(props) {
