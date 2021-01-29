@@ -1,14 +1,14 @@
-import { request } from './Api'
-import { API_BASE_URL } from '../constant';
+import {request} from './Api'
+import {API_BASE_URL} from '../constants';
 
-export function getTask(task){
+export function getTask(task) {
     return request({
         url: API_BASE_URL + "/tasks/" + task.id,
         method: 'GET'
     });
 }
 
-export function createTask(stepId, task){
+export function createTask(stepId, task) {
     return request({
         url: API_BASE_URL + "/steps/" + stepId + "/tasks",
         method: 'POST',
@@ -16,7 +16,7 @@ export function createTask(stepId, task){
     });
 }
 
-export function updateTask(task){
+export function updateTask(task) {
     return request({
         url: API_BASE_URL + "/tasks/" + task.id,
         method: 'PUT',
@@ -24,7 +24,7 @@ export function updateTask(task){
     });
 }
 
-export function deleteTask(task){
+export function deleteTask(task) {
     return request({
         url: API_BASE_URL + "/tasks/" + task.id,
         method: 'DELETE'

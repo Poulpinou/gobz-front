@@ -1,31 +1,31 @@
 .text-primary {
-    color: $primary;
+  color: $primary;
 }
 
 .text-secondary {
-    color: $secondary;
+  color: $secondary;
 }
 
 .text-light {
-    color: white;
+  color: white;
 }
 
 .text-bold {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .text-centered {
-    text-align: center;
+  text-align: center;
 }
 
 .title-primary {
-    @extend .text-primary;
-    @extend .text-bold;
-    @extend .text-centered;
+  @extend .text-primary;
+  @extend .text-bold;
+  @extend .text-centered;
 }
 
 .title-secondary {
-    @extend .text-primary;
-    @extend .text-bold;
-    @extend .text-centered;
+  @extend .text-primary;
+  @extend .text-bold;
+  @extend .text-centered;
 }

@@ -1,29 +1,28 @@
-import { request } from './Api'
-import { API_BASE_URL } from '../constant';
+import {request} from './Api'
+import {API_BASE_URL} from '../constants';
 
-
-export function getProjects(){
+export function getProjects() {
     return request({
         url: API_BASE_URL + "/projects",
         method: "GET"
     })
 }
 
-export function getProject(projectId){
+export function getProject(projectId) {
     return request({
         url: API_BASE_URL + "/projects/" + projectId,
         method: "GET"
     })
 }
 
-export function getFullProject(projectId){
+export function getFullProject(projectId) {
     return request({
         url: API_BASE_URL + "/projects/" + projectId + "/full",
         method: "GET"
     })
 }
 
-export function createProject(project){
+export function createProject(project) {
     return request({
         url: API_BASE_URL + "/projects",
         method: 'POST',
@@ -31,7 +30,7 @@ export function createProject(project){
     })
 }
 
-export function updateProject(project){
+export function updateProject(project) {
     return request({
         url: API_BASE_URL + "/projects/" + project.id,
         method: 'PUT',
@@ -40,7 +39,7 @@ export function updateProject(project){
 }
 
 
-export function deleteProject(project){
+export function deleteProject(project) {
     return request({
         url: API_BASE_URL + "/projects/" + project.id,
         method: 'DELETE'

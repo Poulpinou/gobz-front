@@ -1,8 +1,8 @@
-import { request } from './Api'
-import { API_BASE_URL, ACCESS_TOKEN } from '../constant';
+import {request} from './Api'
+import {ACCESS_TOKEN, API_BASE_URL} from '../constants';
 
 export function getCurrentUser() {
-    if(!localStorage.getItem(ACCESS_TOKEN)) {
+    if (!localStorage.getItem(ACCESS_TOKEN)) {
         return Promise.reject("No access token set.");
     }
 

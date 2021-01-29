@@ -1,0 +1,52 @@
+@import '../../../style/main';
+
+
+$sideBarWidth: 20%;
+
+.projects-page {
+  .sidebar {
+    position: fixed;
+    left: 0;
+    top: $appHeaderHeight;
+    bottom: 0;
+    width: $sideBarWidth;
+    box-shadow: 2px 0px 8px rgba($primary, 0.5);
+  }
+
+  .content {
+    margin-left: $sideBarWidth;
+    padding: 10px;
+  }
+}
+
+.project-view {
+  margin: 5px;
+
+  .project-infos {
+    padding: 10px 5px 10px 5px;
+    min-height: 200px;
+    border-radius: 10px;
+    background-color: $light-accent;
+
+    .actions {
+
+      button {
+        margin-left: 4px;
+      }
+    }
+  }
+
+  .project-sections {
+    margin-top: 20px;
+
+    .project-tabs {
+      width: 100%;
+    }
+
+    .section-content {
+      margin-left: 0;
+      width: 100%;
+      min-height: 200px;
+    }
+  }
+}

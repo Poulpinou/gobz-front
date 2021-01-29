@@ -1,21 +1,21 @@
-import { request } from './Api'
-import { API_BASE_URL } from '../constant';
+import {request} from './Api'
+import {API_BASE_URL} from '../constants';
 
-export function getProjectChapters(projectId){
+export function getProjectChapters(projectId) {
     return request({
         url: API_BASE_URL + "/projects/" + projectId + "/chapters",
         method: 'GET'
     });
 }
 
-export function getChapter(chapter){
+export function getChapter(chapter) {
     return request({
         url: API_BASE_URL + "/chapters/" + chapter.id,
         method: 'GET'
     });
 }
 
-export function createChapter(projectId, chapter){
+export function createChapter(projectId, chapter) {
     return request({
         url: API_BASE_URL + "/projects/" + projectId + "/chapters",
         method: 'POST',
@@ -23,7 +23,7 @@ export function createChapter(projectId, chapter){
     });
 }
 
-export function updateChapter(chapter){
+export function updateChapter(chapter) {
     return request({
         url: API_BASE_URL + "/chapters/" + chapter.id,
         method: 'PUT',
@@ -31,7 +31,7 @@ export function updateChapter(chapter){
     });
 }
 
-export function deleteChapter(chapter){
+export function deleteChapter(chapter) {
     return request({
         url: API_BASE_URL + "/chapters/" + chapter.id,
         method: 'DELETE'

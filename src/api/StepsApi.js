@@ -1,14 +1,14 @@
-import { request } from './Api'
-import { API_BASE_URL } from '../constant';
+import {request} from './Api'
+import {API_BASE_URL} from '../constants';
 
-export function getStep(step){
+export function getStep(step) {
     return request({
         url: API_BASE_URL + "/steps/" + step.id,
         method: 'GET'
     });
 }
 
-export function createStep(chapterId, step){
+export function createStep(chapterId, step) {
     return request({
         url: API_BASE_URL + "/chapters/" + chapterId + "/steps",
         method: 'POST',
@@ -16,7 +16,7 @@ export function createStep(chapterId, step){
     });
 }
 
-export function updateStep(step){
+export function updateStep(step) {
     return request({
         url: API_BASE_URL + "/steps/" + step.id,
         method: 'PUT',
@@ -24,7 +24,7 @@ export function updateStep(step){
     });
 }
 
-export function deleteStep(step){
+export function deleteStep(step) {
     return request({
         url: API_BASE_URL + "/steps/" + step.id,
         method: 'DELETE'
