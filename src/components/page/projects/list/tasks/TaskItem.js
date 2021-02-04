@@ -11,7 +11,7 @@ class TaskItem extends Component {
                 className="task-item"
                 key={task.id}
                 type="checkbox"
-                label={task.name}
+                label={task.text}
                 name="task-task.id"
                 checked={task.isDone}
                 disabled

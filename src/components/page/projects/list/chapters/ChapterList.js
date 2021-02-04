@@ -9,7 +9,7 @@ class ChapterList extends Component {
 
         return (
             <div className="chapter-list">
-                {(chapters?.length) <= 0
+                {(chapters?.length ?? 0) <= 0
                     ? <p className="text-centered">Aucun Chapitre</p>
                     : chapters.map(
                         (chapter) => (

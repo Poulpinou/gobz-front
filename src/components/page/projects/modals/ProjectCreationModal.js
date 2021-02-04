@@ -37,10 +37,11 @@ class ProjectCreationModal extends Component {
             .then(response => {
                 Alert.success(response.name + " a été créé avec succès");
                 this.props.actions.addProject(response);
-            }).catch(error => {
-            console.error(error)
-            Alert.error("Une erreur s'est produite, veuillez réessayer");
-        })
+            })
+            .catch(error => {
+                console.error(error)
+                Alert.error("Une erreur s'est produite, veuillez réessayer");
+            })
 
         this.handleClose();
     }

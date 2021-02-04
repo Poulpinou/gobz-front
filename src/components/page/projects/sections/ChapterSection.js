@@ -1,7 +1,12 @@
 import React, {Component} from 'react';
 import ChapterList from '../list/chapters/ChapterList'
 import {Button, Col, Form, Row} from 'react-bootstrap';
+import {createChapter} from "../../../../api/ChaptersApi";
 import './style.scss'
+import Alert from "react-s-alert";
+import {connect} from "react-redux";
+import {bindActionCreators} from "redux";
+import {Chapters as ChaptersActions} from "../../../../actions/projects";
 
 const newChapterInitialValue = {
     name: "",
@@ -14,44 +19,6 @@ class ChapterSection extends Component {
         super(props);
 
         this.state = {
-            chapters: [
-                {
-                    id: 1,
-                    name: "Chapitre #1",
-                    description: "Chapitre un",
-                    steps: [
-                        {
-                            id: 1,
-                            name: "Etape #1",
-                            description: "Première étape",
-                            tasks: [
-                                {
-                                    id: 1,
-                                    name: "Tâche #1",
-                                    description: "Première tâche",
-                                    isDone: true
-                                },
-                                {
-                                    id: 2,
-                                    name: "Tâche #2",
-                                    description: "Seconde tâche",
-                                    isDone: false
-                                },
-                            ]
-                        },
-                        {
-                            id: 2,
-                            name: "Etape #2",
-                            description: "Deuxième étape"
-                        }
-                    ]
-                },
-                {
-                    id: 2,
-                    name: "Chapitre #2",
-                    description: "Chapitre deux",
-                }
-            ],
             newChapter: newChapterInitialValue,
             newChapterShown: false
         }
@@ -66,9 +33,25 @@ class ChapterSection extends Component {
 
     handleNewChapterClose = () => {
         this.setState({
-            newChapterShown: false,
-            newChapter: newChapterInitialValue
+            newChapterShown: false
         })
+    }
+
+    handleNewChapterValidate = (event) => {
+        event.preventDefault();
+
+        const {project, actions} = this.props;
+
+        createChapter(project.id, this.state.newChapter)
+            .then(response => {
+                actions.addChapter(response);
+                Alert.success(response.name + " créé avec succès!");
+            })
+            .catch(error => {
+                console.error(error)
+                Alert.error("Une erreur s'est produite, veuillez réessayer");
+            })
+            .finally(this.handleNewChapterClose)
     }
 
     handleInputChange = (event) => {
@@ -88,11 +71,11 @@ class ChapterSection extends Component {
         const {newChapter} = this.state;
 
         return (
-            <Form>
+            <Form onSubmit={this.handleNewChapterValidate}>
                 <Form.Group controlId="form-create-project-name">
                     <Form.Label>Nom du chapitre</Form.Label>
                     <Form.Control onChange={this.handleInputChange} type="text"
-                                  placeholder={"Chapitre #" + (this.state.chapters.length + 1)} name="name"
+                                  placeholder={"Chapitre #" + ((this.state.chapters?.length ?? 0) + 1 )} name="name"
                                   value={newChapter.name}/>
                 </Form.Group>
 
@@ -115,7 +98,8 @@ class ChapterSection extends Component {
     }
 
     render() {
-        const {chapters, newChapterShown} = this.state;
+        const {newChapterShown} = this.state;
+        const {chapters} = this.props;
 
         return (
             <div className="chapter-section">
@@ -145,4 +129,13 @@ class ChapterSection extends Component {
     }
 }
 
-export default ChapterSection;
+const mapDispatchToProps = (dispatch) => ({
+    actions: bindActionCreators(ChaptersActions, dispatch)
+})
+
+const mapStateToProps = (state) => ({
+    project: state.projects.active,
+    chapters: state.projects.active.chapters
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(ChapterSection);

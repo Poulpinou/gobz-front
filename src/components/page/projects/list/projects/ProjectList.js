@@ -7,12 +7,43 @@ import ProjectCreationModal from "../../modals/ProjectCreationModal";
 
 class ProjectList extends Component {
 
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            filters: {
+                text: ""
+            }
+        }
+    }
+
+    handleTextFilterInputChange = (event) => {
+        this.setState({
+            filters: {
+                ...this.state.filters,
+                text: event.target.value
+            }
+        })
+    }
+
+    projectShouldBeDisplayed = (project) => {
+        const {filters} = this.state;
+
+        if(filters.text !== ""){
+            if(!project.name.includes(filters.text)){
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     renderProjectListHeader() {
         return (
             <div className="project-list-header">
                 <div className="filter-menu">
                     <Form inline>
-                        <FormControl type="text" placeholder="Filter"/>
+                        <FormControl type="text" placeholder="Filter" value={this.state.filters.text} onChange={this.handleTextFilterInputChange}/>
                     </Form>
                 </div>
 
@@ -31,8 +62,9 @@ class ProjectList extends Component {
                 <div className="list">
                     {projects?.list?.length <= 0
                         ? <p className="text-centered">Aucun projet trouvé</p>
-                        : projects.list.map(
-                            (project) => (
+                        : projects.list
+                            .filter(this.projectShouldBeDisplayed)
+                            .map(project => (
                                 <ProjectItem
                                     project={project}
                                     key={project.id}

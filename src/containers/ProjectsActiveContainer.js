@@ -1,9 +1,9 @@
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as ProjectActions from '../actions/ProjectsAction';
+import {Active} from "../actions/projects";
 
 const mapDispatchToProps = (dispatch) => ({
-    actions: bindActionCreators(ProjectActions, dispatch)
+    actions: bindActionCreators(Active, dispatch)
 })
 
 const mapStateToProps = (state) => ({

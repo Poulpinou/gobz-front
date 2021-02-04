@@ -1,4 +1,4 @@
-import * as types from '../constants/actions/ProjectsActionTypes';
+import PROJECTS from '../constants/actions/ProjectsActionTypes';
 
 const initialValue = {
     active: null,
@@ -7,13 +7,46 @@ const initialValue = {
 
 const projects = (state = initialValue, action) => {
     switch (action.type) {
-        case types.SET_ACTIVE_PROJECT:
+
+        // List
+        case PROJECTS.LIST.SET:
+            return {
+                ...state,
+                list: action.projects
+            }
+
+        case PROJECTS.LIST.SET_AND_ACTIVE_FIRST:
+            return {
+                ...state,
+                active: action.projects?.length > 0 ? action.projects[0] : null,
+                list: action.projects
+            }
+
+        case PROJECTS.LIST.ADD_PROJECT:
+            return {
+                ...state,
+                list: [
+                    ...state.list,
+                    action.project
+                ]
+            }
+
+        case PROJECTS.LIST.REMOVE_PROJECT:
+            return {
+                ...state,
+                active: (state.active?.id === action.project.id) ? null : state.active,
+                list: state.list.filter(project => project.id !== action.project?.id)
+            }
+
+
+        // Active
+        case PROJECTS.ACTIVE.SET:
             return {
                 ...state,
                 active: action.active
             }
 
-        case types.UPDATE_ACTIVE_PROJECT:
+        case PROJECTS.ACTIVE.UPDATE:
             return {
                 ...state,
                 active: {
@@ -23,40 +56,156 @@ const projects = (state = initialValue, action) => {
                 list: state.list.map(project => project.id === action.project?.id ? action.project : project)
             }
 
-        case types.FETCH_ACTIVE_PROJECT:
+        case PROJECTS.ACTIVE.FETCH:
             return {
                 ...state,
                 active: action.project,
                 list: state.list.map(project => project.id === action.project?.id ? action.project : project)
             }
 
-        case types.SET_PROJECTS:
+
+        // Chapters
+        case PROJECTS.CHAPTERS.ADD:
             return {
                 ...state,
-                list: action.projects
+                active: {
+                    ...state.active,
+                    chapters: [
+                        ...state.active.chapters,
+                        action.chapter
+                    ]
+                }
             }
 
-        case types.SET_PROJECTS_ACTIVE_FIRST:
+        case PROJECTS.CHAPTERS.REMOVE:
             return {
                 ...state,
-                active: action.projects?.length > 0 ? action.projects[0] : null,
-                list: action.projects
+                active: {
+                    ...state.active,
+                    chapters: state.active.chapters.filter(chapter => chapter.id !== action.chapterId)
+                }
             }
 
-        case types.ADD_PROJECT:
+        case PROJECTS.CHAPTERS.UPDATE:
             return {
                 ...state,
-                list: [
-                    ...state.list,
-                    action.project
-                ]
+                active: {
+                    ...state.active,
+                    chapters: state.active.chapters.map(chapter =>
+                        chapter.id === action.chapter.id
+                            ? {
+                                ...chapter,
+                                ...action.chapter
+                            }
+                            : chapter
+                    )
+                }
             }
 
-        case types.REMOVE_PROJECT:
+
+        // Steps
+        case PROJECTS.STEPS.ADD:
             return {
                 ...state,
-                active: (state.active?.id === action.project.id) ? null : state.active,
-                list: state.list.filter(project => project.id !== action.project?.id)
+                active: {
+                    ...state.active,
+                    chapters: state.active.chapters.map(chapter =>
+                        chapter.id === action.chapter.id
+                            ? {
+                                ...chapter,
+                                steps: [
+                                    ...chapter.steps,
+                                    action.step
+                                ]
+                            }
+                            : chapter
+                    )
+                }
+            }
+
+        case PROJECTS.STEPS.REMOVE:
+            return {
+                ...state,
+                active: {
+                    ...state.active,
+                    chapters: state.active.chapters.map(chapter =>
+                        chapter.steps.filter(step => step.id !== action.stepId)
+                    )
+                }
+            }
+
+        case PROJECTS.STEPS.UPDATE:
+            return {
+                ...state,
+                active: {
+                    ...state.active,
+                    chapters: state.active.chapters.map(chapter =>
+                        chapter.steps.map(step =>
+                            step.id === action.step.id
+                                ? {
+                                    ...step,
+                                    ...action.step
+                                }
+                                : step
+                        )
+                    )
+                }
+            }
+
+
+        // Tasks
+        case PROJECTS.TASKS.ADD:
+            return {
+                ...state,
+                active: {
+                    ...state.active,
+                    chapters: state.active.chapters.map(chapter =>
+                        chapter.steps.map(step =>
+                            step.id === action.step.id
+                                ? {
+                                    ...step,
+                                    tasks: [
+                                        ...step.tasks,
+                                        action.task
+                                    ]
+                                }
+                                : step
+                        )
+                    )
+                }
+            }
+
+        case PROJECTS.TASKS.REMOVE:
+            return {
+                ...state,
+                active: {
+                    ...state.active,
+                    chapters: state.active.chapters.map(chapter =>
+                        chapter.steps.map(step =>
+                            step.tasks.filter(task => task.id !== action.taskId)
+                        )
+                    )
+                }
+            }
+
+        case PROJECTS.TASKS.UPDATE:
+            return {
+                ...state,
+                active: {
+                    ...state.active,
+                    chapters: state.active.chapters.map(chapter =>
+                        chapter.steps.map(step =>
+                            step.tasks.map(task =>
+                                task.id === action.task.id
+                                    ? {
+                                        ...task,
+                                        ...action.task
+                                    }
+                                    : task
+                            )
+                        )
+                    )
+                }
             }
 
         default:
